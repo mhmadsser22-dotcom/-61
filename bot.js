@@ -1,33 +1,43 @@
 const mineflayer = require('mineflayer');
 const express = require('express');
+
+// إعداد سيرفر ويب بسيط لكي تستقر ريلواي (Railway Health Check)
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
   res.send('Bot is running 24/7!');
 });
 
-app.listen(3000, () => {
-  console.log('Web server ready.');
+app.listen(PORT, () => {
+  console.log(`Web server ready on port ${PORT}`);
 });
 
+// دالة تشغيل البوت وربطه بسيرفر ماينكرافت
 function createBot() {
   const bot = mineflayer.createBot({
-  host: 'mhmadsser2.aternos.me',
-  port: 12492,
-  username: 'AFK_Bot'
-});
+    host: 'Keepcourse.minefort.com',
+    port: 25565,
+    username: 'AFK_Bot'
+  });
 
   bot.on('spawn', () => {
-    console.log('Bot has joined the Java server successfully!');
+    console.log('تم اتصال البوت بنجاح ودخل السيرفر!');
+  });
+
+  bot.on('chat', (username, message) => {
+    if (username === bot.username) return;
+    console.log(`${username}: ${message}`);
+  });
+
+  // إعادة الاتصال تلقائياً إذا انقطع أو أُغلق السيرفر مؤقتاً
+  bot.on('end', (reason) => {
+    console.log(`انقطع اتصال البوت بسبب: ${reason}. جاري إعادة المحاولة خلال 5 ثوانٍ...`);
+    setTimeout(createBot, 5000);
   });
 
   bot.on('error', (err) => {
-    console.log('Error:', err);
-  });
-
-  bot.on('end', () => {
-    console.log('Connection ended, reconnecting...');
-    setTimeout(createBot, 5000);
+    console.log('حدث خطأ في البوت:', err);
   });
 }
 
