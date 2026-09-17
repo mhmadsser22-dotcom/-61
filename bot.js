@@ -1,29 +1,28 @@
 const mineflayer = require('mineflayer');
 const express = require('express');
 
-// إعداد سيرفر ويب بسيط لكي تستقر ريلواي (Railway Health Check)
+// إعداد سيرفر ويب مصغر لضمان استقرار ريلواي (Health Check)
 const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.get('/', (req, res) => {
-  res.send('Bot is running 24/7!');
+  res.send('Bot is running 24/7 on Spigot 1.21.4!');
 });
 
 app.listen(PORT, () => {
   console.log(`Web server ready on port ${PORT}`);
 });
 
-// دالة تشغيل البوت وربطه بسيرفر ماينكرافت
 function createBot() {
   const bot = mineflayer.createBot({
     host: 'Keepcourse.minefort.com',
     port: 25565,
     username: 'AFK_Bot',
-    version: '26.1.2' // تم تحديد الإصدار يدوياً لتجنب مشاكل البروتوكول
+    version: '1.21.4' // الإصدار المطابق لسيرفر الحنفية (Spigot)
   });
 
   bot.on('spawn', () => {
-    console.log('تم اتصال البوت بنجاح ودخل السيرفر!');
+    console.log('تم اتصال البوت بنجاح ودخل سيرفر الحنفية (Spigot) بنجاح!');
   });
 
   bot.on('chat', (username, message) => {
@@ -31,14 +30,14 @@ function createBot() {
     console.log(`${username}: ${message}`);
   });
 
-  // إعادة الاتصال تلقائياً إذا انقطع أو أُغلق السيرفر مؤقتاً
+  // إعادة الاتصال تلقائياً في حال انقطع الاتصال لأي سبب
   bot.on('end', (reason) => {
-    console.log(`انقطع اتصال البوت بسبب: ${reason}. جاري إعادة المحاولة خلال 5 ثوانٍ...`);
+    console.log(`انقطع الاتصال بسبب: ${reason}. جاري إعادة المحاولة خلال 5 ثوانٍ...`);
     setTimeout(createBot, 5000);
   });
 
   bot.on('error', (err) => {
-    console.log('حدث خطأ في البوت:', err);
+    console.log('خطأ في البوت:', err);
   });
 }
 
