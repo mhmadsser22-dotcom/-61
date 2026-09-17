@@ -12,8 +12,11 @@ app.listen(3000, () => {
 
 function createBot() {
   const bot = mineflayer.createBot({
-    host: 'mhmadsser2.aternos.me',
-    port: 12492,
+  host: 'mhmadsser2.aternos.me',
+  port: 12492,
+  username: 'AFK_Bot'
+});
+
     username: 'AFK_Bot'
   });
 
