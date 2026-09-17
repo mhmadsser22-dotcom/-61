@@ -17,9 +17,6 @@ function createBot() {
   username: 'AFK_Bot'
 });
 
-    username: 'AFK_Bot'
-  });
-
   bot.on('spawn', () => {
     console.log('Bot has joined the Java server successfully!');
   });
