@@ -1,4 +1,4 @@
-const bedrock = require('bedrock-protocol');
+const mineflayer = require('mineflayer');
 const express = require('express');
 const app = express();
 
@@ -10,22 +10,25 @@ app.listen(3000, () => {
   console.log('Web server ready.');
 });
 
-const client = bedrock.createClient({
-  host: 'mhmadsser2.aternos.me',
-  port: 12492,
-  username: 'AFK_Bot',
-  offline: true,
-  version: '1.26.45'
-});
+function createBot() {
+  const bot = mineflayer.createBot({
+    host: 'mhmadsser2.aternos.me',
+    port: 12492,
+    username: 'AFK_Bot'
+  });
 
-client.on('join', () => {
-  console.log('Bot has joined the Aternos server successfully!');
-});
+  bot.on('spawn', () => {
+    console.log('Bot has joined the Java server successfully!');
+  });
 
-client.on('error', (err) => {
-  console.log('Error:', err);
-});
+  bot.on('error', (err) => {
+    console.log('Error:', err);
+  });
 
-client.on('close', () => {
-  console.log('Connection closed.');
-});
+  bot.on('end', () => {
+    console.log('Connection ended, reconnecting...');
+    setTimeout(createBot, 5000);
+  });
+}
+
+createBot();
