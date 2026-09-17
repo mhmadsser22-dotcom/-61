@@ -1,12 +1,13 @@
 {
   "name": "java-afk-bot",
   "version": "1.0.0",
+  "description": "Minecraft AFK Bot for Spigot",
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
+    "express": "^4.19.2",
     "mineflayer": "^4.20.0"
   }
 }
