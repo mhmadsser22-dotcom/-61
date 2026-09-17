@@ -1,13 +1,15 @@
 {
-  "name": "java-afk-bot",
-  "version": "1.0.0",
-  "description": "Minecraft AFK Bot for Spigot",
+  "name": "ultimate-smart-bot",
+  "version": "2.0.0",
+  "description": "Advanced Smart Minecraft Bot for Spigot 1.21.4",
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js"
   },
   "dependencies": {
     "express": "^4.19.2",
-    "mineflayer": "^4.20.0"
+    "mineflayer": "^4.20.0",
+    "mineflayer-pathfinder": "^2.4.3",
+    "minecraft-data": "^3.152.0"
   }
 }
