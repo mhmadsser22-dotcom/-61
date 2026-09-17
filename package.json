@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "bedrock-protocol": "*",
+    "express": "*"
+  },
+  "scripts": {
+    "start": "node bot.js"
+  }
+}
