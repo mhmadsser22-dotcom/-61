@@ -3,7 +3,7 @@ const express = require('express');
 
 // إعداد سيرفر ويب بسيط لكي تستقر ريلواي (Railway Health Check)
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 app.get('/', (req, res) => {
   res.send('Bot is running 24/7!');
@@ -18,7 +18,8 @@ function createBot() {
   const bot = mineflayer.createBot({
     host: 'Keepcourse.minefort.com',
     port: 25565,
-    username: 'AFK_Bot'
+    username: 'AFK_Bot',
+    version: '26.1.2' // تم تحديد الإصدار يدوياً لتجنب مشاكل البروتوكول
   });
 
   bot.on('spawn', () => {
